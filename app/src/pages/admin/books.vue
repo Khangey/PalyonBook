@@ -1,12 +1,12 @@
 <template>
     <v-card>
-        <v-card-title> 图书管理 <v-chip small class="primary">Beta</v-chip> </v-card-title>
-        <v-card-text> 此表格仅展示图书的部分字段，点击即可快捷修改。完整图书信息请点击链接查看书籍详情页面</v-card-text>
+        <v-card-title> དཔེ་དེབ་དོ་དམ། <v-chip small class="primary">Beta</v-chip> </v-card-title>
+        <v-card-text> འདིར་མངོན་པ་ནི་དཔེ་དེབ་ཀྱི་ཆ་འཕྲིན་ཆ་ཚང་མ་ཡིན་པས། དེར་རྡེབ་ན་མྱུར་དུ་བཟོ་བཅོས་གཏོང་ཐུབ། དཔེ་དེབ་ཀྱི་ས་འཕྲིན་ཆ་ཚང་ཞིབ་མོའི་ནང་དོན་ལ་གཟིགས་རོགས།</v-card-text>
         <v-card-actions>
-            <v-btn :disabled="loading" outlined color="primary" @click="getDataFromApi"><v-icon>mdi-reload</v-icon>刷新</v-btn>
-            <v-btn :disabled="loading" outlined color="info" @click="show_dialog_auto_file"><v-icon>mdi-info</v-icon>自动更新图书信息... </v-btn>
+            <v-btn :disabled="loading" outlined color="primary" @click="getDataFromApi"><v-icon>mdi-reload</v-icon>གསར་འདྲེན།</v-btn>
+            <v-btn :disabled="loading" outlined color="info" @click="show_dialog_auto_file"><v-icon>mdi-info</v-icon>དེབ་ཀྱི་ཆ་འཕྲིན་རང་འགུལ་གསར་འདྲེན།</v-btn>
             <v-spacer></v-spacer>
-            <v-text-field cols="2" dense v-model="search" append-icon="mdi-magnify" label="搜索" single-line hide-details></v-text-field>
+            <v-text-field cols="2" dense v-model="search" append-icon="mdi-magnify" label="འཚོལ་བཤེར།" single-line hide-details></v-text-field>
         </v-card-actions>
         <v-data-table
             dense
@@ -24,10 +24,10 @@
             :footer-props="{ 'items-per-page-options': [10, 50, 100] }"
         >
             <template v-slot:item.status="{ item }">
-                <v-chip small v-if="item.status == 'ready'" class="success">可导入</v-chip>
-                <v-chip small v-else-if="item.status == 'exist'" class="lighten-4">已存在</v-chip>
-                <v-chip small v-else-if="item.status == 'imported'" class="primary">导入成功</v-chip>
-                <v-chip small v-else-if="item.status == 'new'" class="grey">待扫描</v-chip>
+                <v-chip small v-if="item.status == 'ready'" class="success">འདྲེན་ཆོག་པ།</v-chip>
+                <v-chip small v-else-if="item.status == 'exist'" class="lighten-4">ད་ཡོད་དཔེ་དེབ།</v-chip>
+                <v-chip small v-else-if="item.status == 'imported'" class="primary">དྲངས་ཟིན་པ།</v-chip>
+                <v-chip small v-else-if="item.status == 'new'" class="grey">བཤེར་འབེབ་མ་ཟིན་པ།</v-chip>
                 <v-chip small v-else class="info">{{ item.status }}</v-chip>
             </template>
             <template v-slot:item.img="{ item }">
@@ -37,27 +37,27 @@
                 <a target="_blank" :href="`/book/${item.id}`">{{ item.id }}</a>
             </template>
             <template v-slot:item.title="{ item }">
-                <v-edit-dialog large :return-value.sync="item.title" @save="save(item, 'title')" save-text="保存" cancel-text="取消">
+                <v-edit-dialog large :return-value.sync="item.title" @save="save(item, 'title')" save-text="གསོག་འཇོག" cancel-text="དོར།">
                     <span class="three-lines" style="max-width: 200px; min-width: 120px; ">{{ item.title }}</span>
 
                     <template v-slot:input>
-                        <div class="mt-4 text-h6">修改字段</div>
-                        <v-textarea v-model="item.title" label="书名" style="min-width: 400px" counter></v-textarea>
+                        <div class="mt-4 text-h6">ས་མིག་བཟོ་བཅོས།</div>
+                        <v-textarea v-model="item.title" label="དེབ་མིང་།" style="min-width: 400px" counter></v-textarea>
                     </template>
                 </v-edit-dialog>
             </template>
 
             <template v-slot:item.author="{ item }">
-                <v-edit-dialog large :return-value.sync="item.author" @save="save(item, 'authors')" save-text="保存" cancel-text="取消">
+                <v-edit-dialog large :return-value.sync="item.author" @save="save(item, 'authors')" save-text="གསོག་འཇོག" cancel-text="དོར།">
                     <span class="three-lines" style="max-width: 200px" v-if="item.authors">{{ item.authors.join("/") }}</span>
                     <span v-else> - </span>
                     <template v-slot:input>
                         <!-- AUTHORS -->
-                        <div class="mt-4 text-h6">修改字段</div>
+                        <div class="mt-4 text-h6">ས་མིག་བཟོ་བཅོས།</div>
                         <v-combobox
                             v-model="item.authors"
                             :items="item.authors"
-                            label="作者"
+                            label="མཛད་པ་པོ།"
                             :search-input.sync="tag_input"
                             hide-selected
                             multiple
@@ -65,9 +65,9 @@
                         >
                             <template v-slot:no-data>
                                 <v-list-item>
-                                    <span v-if="!tag_input">请输入新的名称</span>
+                                    <span v-if="!tag_input">མིང་གསར་བ་བསྐོང་རོགས།</span>
                                     <div v-else>
-                                        <span class="subheading">添加</span>
+                                        <span class="subheading">ཁ་སྣོན།</span>
                                         <v-chip color="green lighten-3" label small rounded> {{ tag_input }} </v-chip>
                                     </div>
                                 </v-list-item>
@@ -85,12 +85,12 @@
             </template>
 
             <template v-slot:item.rating="{ item }">
-                <v-edit-dialog large :return-value.sync="item.rating" @save="save(item, 'rating')" save-text="保存" cancel-text="取消">
-                    <span v-if="item.rating != null">{{ item.rating }} 星</span>
+                <v-edit-dialog large :return-value.sync="item.rating" @save="save(item, 'rating')" save-text="གསོག་འཇོག" cancel-text="དོར།">
+                    <span v-if="item.rating != null">སྐར་མ་{{ item.rating }}</span>
                     <span v-else> - </span>
                     <template v-slot:input>
-                        <div class="mt-4 text-h6">修改字段</div>
-                        <v-rating label="评分" v-model="item.rating" color="yellow accent-4" length="10" dense></v-rating>
+                        <div class="mt-4 text-h6">ས་མིག་བཟོ་བཅོས།</div>
+                        <v-rating label="སྐར་མ་ཆ་འཇོག" v-model="item.rating" color="yellow accent-4" length="10" dense></v-rating>
                     </template>
                 </v-edit-dialog>
             </template>
@@ -100,28 +100,28 @@
                     large
                     :return-value.sync="item.publisher"
                     @save="save(item, 'publisher')"
-                    save-text="保存"
-                    cancel-text="取消"
+                    save-text="གསོག་འཇོག"
+                    cancel-text="དོར།"
                 >
                     {{ item.publisher }}
                     <template v-slot:input>
-                        <div class="mt-4 text-h6">修改字段</div>
-                        <v-text-field v-model="item.publisher" label="出版社" counter></v-text-field>
+                        <div class="mt-4 text-h6">ས་མིག་བཟོ་བཅོས།</div>
+                        <v-text-field v-model="item.publisher" label="པར་ཁང་།" counter></v-text-field>
                     </template>
                 </v-edit-dialog>
             </template>
 
             <template v-slot:item.tags="{ item }">
-                <v-edit-dialog large :return-value.sync="item.tags" @save="save(item, 'tags')" save-text="保存" cancel-text="取消">
+                <v-edit-dialog large :return-value.sync="item.tags" @save="save(item, 'tags')" save-text="གསོག་འཇོག" cancel-text="དོར།">
                     <span style="width: 200px" class="three-lines" v-if="item.tags">{{ item.tags.join("/") }}</span>
                     <span v-else> - </span>
                     <template v-slot:input>
                         <!-- TAGS -->
-                        <div class="mt-4 text-h6">修改字段</div>
+                        <div class="mt-4 text-h6">ས་མིག་བཟོ་བཅོས།</div>
                         <v-combobox
                             v-model="item.tags"
                             :items="item.tags"
-                            label="标签列表"
+                            label="རྟགས་བྱང་།"
                             :search-input.sync="tag_input"
                             hide-selected
                             multiple
@@ -129,9 +129,9 @@
                         >
                             <template v-slot:no-data>
                                 <v-list-item>
-                                    <span v-if="!tag_input">请输入新的标签名称</span>
+                                    <span v-if="!tag_input">རྟགས་བྱང་གསར་བའི་མིང་བསྐོང་རོགས།</span>
                                     <div v-else>
-                                        <span class="subheading">添加标签</span>
+                                        <span class="subheading">རྟགས་བྱང་ཁ་སྣོན།</span>
                                         <v-chip color="green lighten-3" label small rounded> {{ tag_input }} </v-chip>
                                     </div>
                                 </v-list-item>
@@ -149,11 +149,11 @@
             </template>
 
             <template v-slot:item.comments="{ item }">
-                <v-edit-dialog large :return-value.sync="item.comments" @save="save(item, 'comments')" save-text="保存" cancel-text="取消">
+                <v-edit-dialog large :return-value.sync="item.comments" @save="save(item, 'comments')" save-text="གསོག་འཇོག" cancel-text="དོར།">
                     <span :title="item.comments" style="width: 300px" class="three-lines">{{ item.comments.substr(0, 80) }}</span>
                     <template v-slot:input>
-                        <div class="mt-4 text-h6">修改字段</div>
-                        <v-textarea v-model="item.comments" label="简介"></v-textarea>
+                        <div class="mt-4 text-h6">ས་མིག་བཟོ་བཅོས།</div>
+                        <v-textarea v-model="item.comments" label="ངོ་སྤྲོད་མདོ་བསྡུས།"></v-textarea>
                     </template>
                 </v-edit-dialog>
             </template>
@@ -161,11 +161,11 @@
             <template v-slot:item.actions="{ item }">
                 <v-menu offset-y right>
                     <template v-slot:activator="{ on }">
-                        <v-btn color="primary" small v-on="on">操作 <v-icon small>more_vert</v-icon></v-btn>
+                        <v-btn color="primary" small v-on="on">བེད་སྤྱོད། <v-icon small>more_vert</v-icon></v-btn>
                     </template>
                     <v-list dense>
                         <v-list-item @click="delete_book(item)">
-                            <v-list-item-title>删除此书</v-list-item-title>
+                            <v-list-item-title>དཔེ་དེབ་དོར་གསུབ།</v-list-item-title>
                         </v-list-item>
                     </v-list>
                 </v-menu>
@@ -177,35 +177,35 @@
             {{ snackText }}
 
             <template v-slot:action="{ attrs }">
-                <v-btn v-bind="attrs" text @click="snack = false"> 关闭 </v-btn>
+                <v-btn v-bind="attrs" text @click="snack = false">ཁ་རྒྱག</v-btn>
             </template>
         </v-snackbar>
 
         <!-- 提醒拉取图书的规则说明 -->
         <v-dialog v-model="meta_dialog" persistent transition="dialog-bottom-transition" width="500">
             <v-card>
-                <v-toolbar flat dense dark color="primary"> 提醒 </v-toolbar>
+                <v-toolbar flat dense dark color="primary"> དྲན་སྐུལ།</v-toolbar>
                 <v-card-title></v-card-title>
                 <v-card-text>
-                    <p> 即将从互联网拉取所有图书的书籍信息，请了解以下功能限制：</p>
-                    <p> 1. 请在「系统设置」中配置好「互联网书籍信息源」，启用豆瓣插件；</p>
-                    <p> 2. 本操作只更新「没有封面」或「没有简介」的图书；</p>
-                    <p> 3. 受限于豆瓣等服务的限制，每秒钟仅更新1本书; </p>
+                    <p> དྲ་ལམ་ནས་དཔེ་དེབ་མང་པོ་འདྲེན་འཇུག་བྱ་ངེས་ཡིན། འདིའི་སྐོར་བོད་ཡིག་དཔེ་དེབ་ལ་འབྲེལ་བ་མེད། མཉམ་འཇོག་དགོས་རྒྱུ་ལ།</p>
+                    <p> 1. མ་ལག་སྒྲིག་འགོད་ནས་འབྲེལ་ཡོད་འཇུག་སྒོའི་ཁ་ཕྱེས་དགོས།</p>
+                    <p> 2. ཕྱི་ཐུམ་མེད་པ་དང་ངོ་སྤྲོད་མདོ་བསྡུས་མེད་པའི་དཔེ་ཆ་ལ་ནུས་པ་ཐོན་ངེས།</p>
+                    <p> 3. སྐར་ཆ་གཅིག་ལ་དཔེ་དེབ་གཅིག་མ་གཏོགས་མི་ཁེབས། </p>
                     <br></br>
                     <template v-if="progress.total > 0">
-                        <p>当前进展：<v-btn small text link @click="refresh_progress">刷新</v-btn></p>
-                        <p>总共 {{ progress.total }} 本书籍，已更新 {{  progress.done }} 本，更新失败 {{ progress.fail }} 本，无需处理 {{  progress.skip }} 本。</p>
+                        <p>ད་ལྟ་ནི་<v-btn small text link @click="refresh_progress">གསར་འདྲེན་བྱས།</v-btn></p>
+                        <p>ཁྱོན་ནས་དཔེ་དེབ་ཁ་གྲངས་ {{ progress.total }}ཡོད་ལ།， {{  progress.done }} གསར་འདྲེན་བཏང་ཚར།，{{ progress.fail }} གསར་འདྲེན་བཏང་མ་ཚར།，དཔེ་དེབ་{{  progress.skip }}ལྷག་ཐག་གཅོད་བྱེད་མི་དགོས། </p>
                     </template>
-                    <p v-else> 预计需要运行 {{auto_fill_mins}} 分钟，在此期间请不要停止程序</p>
+                    <p v-else> ད་དུང་སྐར་མ {{auto_fill_mins}} ལ་ཐག་གཅོད་བྱ་དགོས་པས་བར་སྐབས་འདིར་དྲ་ངོས་སྒོ་མ་རྒྱག་རོགས།</p>
 
                     <template v-else>
 
                     </template>
                 </v-card-text>
                 <v-card-actions>
-                    <v-btn @click="meta_dialog = !meta_dialog">取消</v-btn>
+                    <v-btn @click="meta_dialog = !meta_dialog">དོར།</v-btn>
                     <v-spacer></v-spacer>
-                    <v-btn color="primary" @click="auto_fill">开始执行！</v-btn>
+                    <v-btn color="primary" @click="auto_fill">མགོ་རྩོམ་ན་ཆོག</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -230,15 +230,15 @@ export default {
         loading: false,
         options: { sortBy: ["id"], sortDesc: [true] },
         headers: [
-            { text: "封面", sortable: false, value: "img", width: "80px" },
+            { text: "ཕྱི་ཤོག", sortable: false, value: "img", width: "80px" },
             { text: "ID", sortable: true, value: "id", width: "80px" },
-            { text: "书名", sortable: true, value: "title" },
-            { text: "作者", sortable: true, value: "author", width: "100px" },
-            { text: "评分", sortable: false, value: "rating", width: "60px" },
-            { text: "出版社", sortable: false, value: "publisher" },
-            { text: "标签", sortable: true, value: "tags", width: "100px" },
-            { text: "简介", sortable: true, value: "comments" },
-            { text: "操作", sortable: false, value: "actions" },
+            { text: "དཔེ་ཆའི་མིང་།", sortable: true, value: "title" },
+            { text: "མཛད་པ་པོ།", sortable: true, value: "author", width: "100px" },
+            { text: "ཆ་འཇོག་སྐར་མ།", sortable: false, value: "rating", width: "60px" },
+            { text: "པར་ཁང་།", sortable: false, value: "publisher" },
+            { text: "རྟགས་བྱང་།", sortable: true, value: "tags", width: "100px" },
+            { text: "ངོ་སྤྲོད་མདོ་བསྡུས།", sortable: true, value: "comments" },
+            { text: "བཅོས་སྒྲིག", sortable: false, value: "actions" },
         ],
         progress: {
             skip: 0,

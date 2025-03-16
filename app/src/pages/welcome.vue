@@ -3,13 +3,13 @@
     <v-col xs=12 sm=8 md=4>
         <v-card class="elevation-12">
             <v-toolbar dark color="primary">
-                <v-toolbar-title align-center >请输入访问密码</v-toolbar-title>
+                <v-toolbar-title align-center >སྒེར་གྱི་དྲ་འཇུག་ཨང་གྲངས་བསྐོང་།</v-toolbar-title>
             </v-toolbar>
             <v-card-text>
                 <p class="py-6 body-3 text-center" >{{welcome}}</p>
                 <v-form @submit.prevent="welcome_login" >
                     <v-text-field prepend-icon="lock" v-model="invite_code" required
-                        label="访问密码" type="password" :error="is_err" :error-messages="msg" :loading="loading"></v-text-field>
+                        label="དྲ་འཇུག་ཨང་གྲངས།" type="password" :error="is_err" :error-messages="msg" :loading="loading"></v-text-field>
                 </v-form>
             </v-card-text>
 
@@ -32,7 +32,7 @@ export default {
         is_err: false,
         err: "ok",
         msg: "",
-        welcome: "本站为私人图书馆，需输入密码才可进行访问",
+        welcome: "དྲ་ཚིགས་འདི་ནི་སྒེར་གཉེར་དྲ་ཚིགས་ཡིན་པས། དྲ་འཇུག་ཨང་གྲངས་སྤྱད་ནས་བེད་སྤྱོད་གཏོང་རོགས།",
         loading: false,
         invite_code: "",
     }),
@@ -44,7 +44,7 @@ export default {
         return app.$backend("/welcome");
     },
     head: () => ({
-        title: "私人图书馆"
+        title: "སྒེར་གྱི་དཔེ་མཛོད་དྲ་ཚིགས།"
     }),
     created() {
         this.$store.commit('navbar', false);

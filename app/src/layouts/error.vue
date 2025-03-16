@@ -27,8 +27,8 @@ export default {
 
   data() {
     return {
-      pageNotFound: "404 Not Found",
-      otherError: "An error occurred",
+      pageNotFound: "404 དྲ་ངོས་རྙེད་མ་བྱུང་།",
+      otherError: "ནོར་འཁྲུལ་ག་གེ་མོ་བྱུང་འདུག",
     };
   },
   head() {

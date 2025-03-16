@@ -6,21 +6,21 @@
         <v-dialog v-model="dialog" persistent transition="dialog-bottom-transition" width="400">
             <v-card>
                 <v-toolbar flat dense dark color="primary">
-                    上传SSL证书
+                    SSLདཔང་ཡིག་སྐྱེལ་འཐོག
                     <v-spacer></v-spacer>
                     <v-btn color="" text @click="dialog = false">关闭</v-btn>
                 </v-toolbar>
                 <v-card-title></v-card-title>
                 <v-card-text>
-                    <p>说明文字</p>
+                    <p>གསལ་བཤད།</p>
                     <v-form ref="form" @submit="upload_ssl">
-                        <v-file-input v-model="ssl_crt" accept=".crt" label="请选择要上传的证书文件（.crt）"></v-file-input>
-                        <v-file-input v-model="ssl_key" accept=".key" label="请选择要上传的证书私钥（.key）"></v-file-input>
+                        <v-file-input v-model="ssl_crt" accept=".crt" label="བདེ་འཇགས་དྲ་ལམ་གྱི་དཔང་ཡིག་（.crt）སྐྱེལ་འཇོག་བྱོས།"></v-file-input>
+                        <v-file-input v-model="ssl_key" accept=".key" label="བདེ་འཇགས་དྲ་ལམ་གྱི་ལྡེ་མིག（.key）སྐྱེལ་འཇོག་བྱོས།"></v-file-input>
                     </v-form>
                 </v-card-text>
                 <v-card-actions >
                     <v-spacer> </v-spacer>
-                    <v-btn :loading="loading" color="primary" @click="upload_ssl">上传SSL证书</v-btn>
+                    <v-btn :loading="loading" color="primary" @click="upload_ssl">SSLདཔང་ཡིག་སྐྱེལ་འཇོག</v-btn>
                     <v-spacer> </v-spacer>
                 </v-card-actions>
             </v-card>
@@ -79,7 +79,7 @@ export default {
             .then( rsp => {
                 this.dialog = false;
                 if ( rsp.err == 'ok' ) {
-                    this.$alert("success", "上传成功！");
+                    this.$alert("success", "ལེགས་འགྲུབ་བྱུང་།");
                 } else {
                     this.$alert("error", rsp.msg);
                 }

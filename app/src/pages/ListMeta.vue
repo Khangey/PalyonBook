@@ -3,7 +3,7 @@
         <template v-if="meta == 'rating'">
             <v-col cols=4 sm=2 v-for="item in meta_items" :key="item.name" >
                 <v-chip :to="item.href" outlined color="primary" >
-                    {{item.name}}星
+                    སྐར་མ་ {{item.name}}
                     <span v-if="item.count">&nbsp;({{item.count}})</span>
                 </v-chip>
             </v-col>
@@ -13,7 +13,7 @@
                 {{item.name}}
                 <span v-if="item.count">&nbsp;({{item.count}})</span>
             </v-chip>
-            <v-btn v-if="total > items.length" @click="expand()" color="primary" rounded small>显示全部...</v-btn>
+            <v-btn v-if="total > items.length" @click="expand()" color="primary" rounded small>ཆ་ཚང་འཆར་དགོས།</v-btn>
         </v-col>
     </v-row>
 </template>
@@ -49,11 +49,11 @@ export default {
     head() {
         var path = this.$route.path;
         var titles = {
-            tag: "全部标签",
-            series: "全部丛书",
-            rating: "全部评分",
-            author: "全部作者",
-            publisher: "全部出版社",
+            tag: "རྟགས་བྱང་ཀུན་འདུས།",
+            series: "དཔེ་རྒྱུན་ཆ་ཚང་།",
+            rating: "ཆ་འཇོག་ཆ་ཚང་།",
+            author: "མཛད་པ་པོ་ཚང་མ།",
+            publisher: "པར་ཁང་ཚང་མ།",
         }
         var meta = this.$route.path.split("/")[1];
         if ( titles[meta] !== undefined ) {

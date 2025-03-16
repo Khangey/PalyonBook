@@ -44,20 +44,20 @@
         <div v-else>
           <div class="d-flex justify-center align-content-center" style="margin-bottom: 20px" v-if="loading">
             <v-progress-circular color="primary" indeterminate size="28" style="margin-right: 10px"/>
-            加载中...
+            དཔེ་ཆ་འདྲེན་བཞིན་ཡོད།
           </div>
           <div style="word-wrap: break-word" v-html="novelContent" v-show="!loading"/>
           <div class="d-flex justify-space-between" v-show="novelContent && !loading">
             <v-btn color="info" elevation="0" :disabled="selected===0"
                    @click="getNovelContent(selected-1)">
-              上一章
+              ལེའུ་སྔོན་མ།
             </v-btn>
             <v-btn outlined elevation="0" @click="sidebar=true" v-show="!sidebar">
-              目录
+              དཀར་ཆག
             </v-btn>
             <v-btn color="primary" elevation="0" :disabled="selected===content.length-1"
                    @click="getNovelContent(selected+1)">
-              下一章
+              ལེའུ་རྗེས་མ།
             </v-btn>
           </div>
         </div>
@@ -85,8 +85,8 @@ export default {
     selected: -1,
     loading: true,
     tip: {
-      title: '正在解析',
-      content: '正在解析目录，请稍后...'
+      title: 'ཁ་ཕྱེས་བཞིན་ཡོད།',
+      content: 'དཀར་ཆག་འདྲེན་བཞིན་ཡོད། ཏོག་ཙམ་སྒུག་ཨ།'
     }
   }),
   created() {
@@ -100,11 +100,11 @@ export default {
       this.$backend(`/book/txt/init?id=${this.bookid}&test=0`)
         .then(rsp => {
           if (rsp.err !== "ok") {
-            this.tip.title = "错误"
+            this.tip.title = "ནོར་འཁྲུལ།"
             this.tip.content = rsp.msg
             return
           }
-          if (rsp.msg === "已解析") {
+          if (rsp.msg === "ཁ་ཕྱེས་ཚར།") {
             this.inited = true
             this.content = rsp.data.content
             this.name = rsp.data.name
@@ -114,23 +114,23 @@ export default {
             let queLen = parseInt(rsp.data.que)
             this.name = rsp.data.name
             if (queLen > 0) {
-              this.tip.title = "队列中"
-              this.tip.content = "前方等待" + queLen + "个转换待完成，已步入后台队列"
+              this.tip.title = "གྲལ་སྒྲིག་བཞིན་ཡོད།"
+              this.tip.content = "མིག་སྔར་" + queLen + "བཅོས་སྒྲིག་བཏང་ཚར། ད་དུང་གྲལ་སྒྲིག་བཞིན་ཡོད།"
               return;
             }
             let intvl = setInterval(() => {
               this.wait--;
-              this.tip.content = "首次阅读，正在解析目录，请稍后... " + this.wait
+              this.tip.content = "ཐེངས་དང་པོར་ཁ་ཕྱེས་བཞིན་ཡོད་པས་ཏོག་ཙམ་སྒུག་རོགས། " + this.wait
               if (this.wait <= 0) {
                 clearInterval(intvl)
-                this.tip.content = "超时未完成，可继续等待稍后刷新尝试"
-                this.tip.title = "解析超时"
+                this.tip.content = "ཁ་ཕྱེས་པའི་ཆུ་ཚོད་རིང་དྲགས་སོང་། ཡང་བསྐྱར་ཚོད་ལྟ་བྱ་རོགས།"
+                this.tip.title = "ཁ་ཕྱེས་པའི་ཆུ་ཚོད་རིང་དྲགས་སོང་།"
                 return
               }
               if (this.wait % 5 !== 0) return;
               this.$backend(`/book/txt/init?id=${this.bookid}&test=1`,)
                 .then(res => {
-                  if (res.err === "ok" && res.msg === "已解析") {
+                  if (res.err === "ok" && res.msg === "ཁ་ཕྱེས་ཟིན།") {
                     this.inited = true;
                     this.content = res.data.content
                     this.name = res.data.name
@@ -153,7 +153,7 @@ export default {
       this.$backend(`/read/txt?id=${this.bookid}&start=${start}&end=${end}`)
         .then(res => {
           if (res.err !== "ok") {
-            this.novelContent = "获取正文失败！" + res.msg
+            this.novelContent = "དཔེ་ཆའི་ནང་དོན་འདྲེན་མ་ཐུབ།" + res.msg
             return
           }
           this.novelContent = title + "<br>" + res.content

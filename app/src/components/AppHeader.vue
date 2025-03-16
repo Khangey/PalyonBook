@@ -78,7 +78,7 @@
                                 ></v-text-field>
                             </v-col>
                             <v-col cols="3">
-                                <v-btn dark rounded @click="do_mobile_search" color="primary">搜索</v-btn>
+                                <v-btn dark rounded @click="do_mobile_search" color="primary">འཚོལ་བཤེར།</v-btn>
                             </v-col>
                         </v-row>
                     </v-form>
@@ -132,7 +132,7 @@
                                 </v-list-item-content>
 
                                 <v-list-item-action>
-                                    <v-btn @click.prevent="hidemsg(idx, msg.id)">好的</v-btn>
+                                    <v-btn @click.prevent="hidemsg(idx, msg.id)">འགྲིག་འདུག</v-btn>
                                 </v-list-item-action>
                             </v-list-item>
                         </v-list>
@@ -157,34 +157,34 @@
                             <v-divider></v-divider>
                             <v-list-item to="/user/detail">
                                 <v-list-item-action><v-icon>contacts</v-icon></v-list-item-action>
-                                <v-list-item-title> 用户中心 </v-list-item-title>
+                                <v-list-item-title> སྤྱོད་མཁན་ས་མིག </v-list-item-title>
                             </v-list-item>
                             <v-list-item to="/user/history">
                                 <v-list-item-action><v-icon>history</v-icon></v-list-item-action>
-                                <v-list-item-title> 阅读记录 </v-list-item-title>
+                                <v-list-item-title> དཔ་ེ་ཀློག་ཟིན་ཐོ། </v-list-item-title>
                             </v-list-item>
                             <v-list-item target="_blank" href="https://github.com/talebook/talebook/issues">
                                 <v-list-item-action><v-icon>sms_failed</v-icon></v-list-item-action>
-                                <v-list-item-title> 反馈 </v-list-item-title>
+                                <v-list-item-title> གནས་ཚུལ་ཡར་སྤྲོད། </v-list-item-title>
                             </v-list-item>
                             <v-divider></v-divider>
                             <template v-if="user.is_admin">
                                 <v-list-item to="/admin/settings">
                                     <v-list-item-action><v-icon color="red">mdi-console</v-icon></v-list-item-action>
-                                    <v-list-item-title> 管理员入口 </v-list-item-title>
+                                    <v-list-item-title> དོ་དམ་པའི་དྲ་སྒོ། </v-list-item-title>
                                 </v-list-item>
                             </template>
 
                             <v-list-item to="/logout">
                                 <v-list-item-action><v-icon>exit_to_app</v-icon></v-list-item-action>
-                                <v-list-item-title> 退出 </v-list-item-title>
+                                <v-list-item-title> ཕྱིར་འབུད། </v-list-item-title>
                             </v-list-item>
                         </v-list>
                     </v-menu>
                 </template>
 
                 <v-btn v-else class="px-xs-1" to="/login" color="indigo accent-4">
-                    <v-icon class="d-none d-sm-flex">account_circle</v-icon> 请登录
+                    <v-icon class="d-none d-sm-flex">account_circle</v-icon> བྱོན་པ་ལེགས།
                 </v-btn>
             </template>
         </v-app-bar>
@@ -228,47 +228,47 @@ export default {
         items: function () {
             var home_links = [
                 // home
-                { icon: "home", href: "/", text: "首页" },
+                { icon: "home", href: "/", text: "གདོང་ཤོག" },
             ];
             var admin_links = [
                 {
                     icon: "mdi-cog",
-                    text: "管理",
+                    text: "དོ་དམ།",
                     expand: this.$route.path.indexOf("/admin/") == 0,
                     groups: [
-                        { icon: "mdi-cog", href: "/admin/settings", text: "系统设置" },
-                        { icon: "mdi-human-greeting", href: "/admin/users", text: "用户管理" },
-                        { icon: "mdi-library-shelves", href: "/admin/books", text: "图书管理" },
-                        { icon: "mdi-import", href: "/admin/imports", text: "导入图书" },
+                        { icon: "mdi-cog", href: "/admin/settings", text: "སྤྱིའི་སྒྲིག་འགོད།" },
+                        { icon: "mdi-human-greeting", href: "/admin/users", text: "སྤྱོད་མཁན་དོ་དམ།" },
+                        { icon: "mdi-library-shelves", href: "/admin/books", text: "དཔེ་དེབ་དོ་དམ།" },
+                        { icon: "mdi-import", href: "/admin/imports", text: "དཔེ་དེབ་ནང་འདྲེན།" },
                     ],
                 },
             ];
             var nav_links = [
-                { heading: "分类浏览" },
-                { icon: "widgets", href: "/nav", text: "分类导览", count: this.sys.books },
-                { icon: "mdi-home-group", href: "/publisher", text: "出版社", count: this.sys.publishers },
-                { icon: "mdi-human-greeting", href: "/author", text: "作者", count: this.sys.authors },
-                { icon: "mdi-tag-heart", href: "/tag", text: "标签", count: this.sys.tags },
+                { heading: "རིགས་བཀར་ས་མིག" },
+                { icon: "widgets", href: "/nav", text: "རིགས་བཀར་རྣམ་གྲངས།", count: this.sys.books },
+                { icon: "mdi-home-group", href: "/publisher", text: "པར་ཁང་།", count: this.sys.publishers },
+                { icon: "mdi-human-greeting", href: "/author", text: "མཛད་པ་པོ།", count: this.sys.authors },
+                { icon: "mdi-tag-heart", href: "/tag", text: "རྟགས་བྱང་།", count: this.sys.tags },
                 {
                     target: "",
                     links: [
-                        { icon: "mdi-library-shelves", href: "/series", text: "丛书", count: this.sys.series },
-                        { icon: "mdi-star-half", href: "/rating", text: "评分" },
-                        { icon: "mdi-trending-up", href: "/hot", text: "热度榜单" },
-                        { icon: "mdi-history", href: "/recent", text: "所有书籍" },
+                        { icon: "mdi-library-shelves", href: "/series", text: "དཔེ་རྒྱུན།", count: this.sys.series },
+                        { icon: "mdi-star-half", href: "/rating", text: "ཆ་འཇོག་སྐར་མ།" },
+                        { icon: "mdi-trending-up", href: "/hot", text: "བྲིན་པའི་དཔེ་དེབ།" },
+                        { icon: "mdi-history", href: "/recent", text: "དཔེ་ཆ་ཆ་ཚང་།" },
                     ],
                 },
             ];
             var friend_links = [
                 // links
-                { heading: "友情链接" },
+                { heading: "མཛའ་འབྲེལ་དྲ་ཚིགས།" },
                 { links: this.sys.friends, target: "_blank" },
             ];
             var sys_links = [
-                { heading: "系统" },
-                { icon: "mdi-history", text: "系统版本", href: "", count: this.sys.version },
-                { icon: "mdi-human", text: "用户数", href: "", count: this.sys.users },
-                { icon: "mdi-cellphone", text: "OPDS介绍", href: "/opds-readme", count: "OPDS", target: "_blank" },
+                { heading: "མ་ལག" },
+                { icon: "mdi-history", text: "མ་ལག་གི་པར་གཞི།", href: "", count: this.sys.version },
+                { icon: "mdi-human", text: "སྤྱོད་མཁན་ཁ་གྲངས།", href: "", count: this.sys.users },
+                { icon: "mdi-cellphone", text: "OPDSངོ་སྤྲོད།", href: "/opds-readme", count: "OPDS", target: "_blank" },
             ];
 
             return home_links

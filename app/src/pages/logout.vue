@@ -12,7 +12,7 @@
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn class="mb-4" rounded color="primary" href="/">返回首页</v-btn>
+                <v-btn class="mb-4" rounded color="primary" href="/">གདོང་ཤོག་ལ་ལོག</v-btn>
                 <v-spacer></v-spacer>
             </v-card-actions>
         </v-card>
@@ -27,10 +27,10 @@ export default {
         this.logout();
     },
     data: () => ({
-        msg: "您已退出登录。",
+        msg: "ཁྱོད་རང་ཕྱིར་འབུད་བྱས་ཟིན།",
     }),
     head: () => ({
-        title: "已退出登录"
+        title: "ཕྱིར་འབུད་བྱས་ཚར།"
     }),
     methods: {
         logout: function() {

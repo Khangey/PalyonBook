@@ -48,13 +48,13 @@ export default {
   head() {
     switch (this.$route.path) {
       case "/hot":
-        return {title: "热门书籍"};
+        return {title: "བྲིན་པའི་དཔེ་དེབ།"};
 
       case "/search":
-        return {title: "搜索"};
+        return {title: "འཚོལ་བཤེར།"};
 
       case "/recent":
-        return {title: "近期更新"};
+        return {title: "ཉེ་ལམ་གསར་འདྲེན།"};
 
       default:
         break
@@ -63,11 +63,11 @@ export default {
     if (this.$route.params.meta !== undefined) {
       var name = decodeURIComponent(this.$route.params.name);
       var titles = {
-        tag: `"${name}”标签的书籍`,
-        series: `${name}丛书`,
-        rating: `${name}星书籍`,
-        author: `${name}的著作`,
-        publisher: `${name}出版的书籍`,
+        tag: `རྟགས་བྱང་"${name}”ཅན་གྱི་དཔེ་ཆ།`,
+        series: `དཔེ་རྒྱུན་${name}ཅན་གྱི་དཔེ་ཆ།`,
+        rating: `སྐར་མ་${name}ཅན་གྱི་དཔེ་ཆ།`,
+        author: `མཛད་པ་པོ་${name}`,
+        publisher: `པར་ཁང་${name}ཅན་གྱི་དཔེ་ཆ།`,
       }
       var meta = this.$route.path.split("/")[1];
       if (titles[meta] !== undefined) {

@@ -8,12 +8,14 @@
                 {{card.title}}
             </v-card-title>
           <v-expand-transition>
+          
             <!-- v-card-text的padding导致动画收起时卡顿，置为 0，内部用一个div来控制-->
+
             <v-card-text v-show="card.show" style="padding: 0">
               <div style="padding: 0 16px 16px">
                 <p v-if="card.subtitle" class="">{{card.subtitle}}</p>
                 <template v-if="card.tips">
-                  <p v-for="t in card.tips" :key="t.text">{{t.text}} <a v-if="t.link" target="_blank" :href="t.link">链接</a></p>
+                  <p v-for="t in card.tips" :key="t.text">{{t.text}} <a v-if="t.link" target="_blank" :href="t.link">དྲ་ཐག</a></p>
                 </template>
 
                 <template v-for="f in card.fields" :key="f.key" >
@@ -39,23 +41,23 @@
                 <template v-if="card.show_friends">
                   <v-row v-for="(friend, idx) in settings.FRIENDS" :key="'friend-'+friend.href">
                     <v-col class='py-0' cols=3>
-                      <v-text-field flat small hide-details single-line v-model="friend.text" label="名称" type="text"></v-text-field>
+                      <v-text-field flat small hide-details single-line v-model="friend.text" label="མིང་།" type="text"></v-text-field>
                     </v-col>
                     <v-col class='pa-0' cols=9>
-                      <v-text-field flat small hide-details single-line v-model="friend.href" label="链接" type="text"
+                      <v-text-field flat small hide-details single-line v-model="friend.href" label="དྲ་ཐག" type="text"
                                     append-outer-icon="delete" @click:append-outer="settings.FRIENDS.splice(idx, 1)" ></v-text-field>
                     </v-col>
                   </v-row>
                   <v-row>
                     <v-col align="center">
-                      <v-btn color="primary" @click="settings.FRIENDS.push({text:'', href: ''})"><v-icon>add</v-icon>添加</v-btn>
+                      <v-btn color="primary" @click="settings.FRIENDS.push({text:'', href: ''})"><v-icon>add</v-icon>ཁ་སྣོན།</v-btn>
                     </v-col>
                   </v-row>
                 </template>
 
                 <template v-if="card.show_socials">
-                  <p>所启用的社交网络将会在登录页面自动显示按钮。</p>
-                  <v-combobox v-model="settings.SOCIALS" :items="sns_items" label="选择要启用的社交网络账号" hide-selected multiple small-chips>
+                  <p>ནུས་སློང་བྱས་ཟིན་པའི་སྤྱི་ཚོགས་འབྲེལ་ལམ་ཞབས་ཞུ་ནས་དྲ་ཚིགས་འདི་ལ་ཐོ་འཇུག་བྱ་ཆོག</p>
+                  <v-combobox v-model="settings.SOCIALS" :items="sns_items" label="སྤྱི་ཚོགས་འབྲེལ་ལམ་ཞབས་ཞུ་གདམ་གསེས་བྱོས།" hide-selected multiple small-chips>
                     <template v-slot:selection="{ attrs, item, parent, selected }">
                       <v-chip v-bind="attrs" color="green lighten-3" :input-value="selected" label small >
                         <span class="pr-2"> {{ item.text }} </span>
@@ -66,7 +68,7 @@
                   <v-row v-for="s in settings.SOCIALS" :key="'social-'+s.value" >
                     <v-col class='py-0' cols=12 sm=2>
                       <v-subheader class="px-0 pt-4" :class="$vuetify.breakpoint.smAndUp?'float-right':''">
-                        {{s.text}}  (<a @click="show_sns_config(s)">说明</a>)
+                        {{s.text}}  (<a @click="show_sns_config(s)">གསལ་བཤད།</a>)
                       </v-subheader>
                     </v-col>
                     <v-col class='py-0' cols=12 sm=3>
@@ -88,7 +90,7 @@
 
         <br/>
         <div class="text-center">
-            <v-btn color="primary" @click="save_settings">保存</v-btn>
+            <v-btn color="primary" @click="save_settings">གསོག་འཇོག</v-btn>
         </div>
     </div>
 </template>
@@ -125,40 +127,40 @@ export default {
         cards: [
             {
             show: false,
-            title: "基础信息",
+            title: "རྩ་བའི་ཆ་འཕྲིན།",
             fields: [
-                { icon: "home", key: "site_title", label: "网站标题", },
-                { icon: "mdi-copyright", key: "HEADER", label: "网站公告", type: 'textarea' },
-                { icon: "mdi-copyright", key: "FOOTER", label: "网站脚注", type: 'textarea' },
+                { icon: "home", key: "site_title", label: "དྲ་ཚིགས་ཁ་བྱང་།", },
+                { icon: "mdi-copyright", key: "HEADER", label: "དྲ་ལམ་སྤྱི་བསྒྲགས།", type: 'textarea' },
+                { icon: "mdi-copyright", key: "FOOTER", label: "དྲ་ཚིགས་ཞབས་མཆན།", type: 'textarea' },
             ],
             groups: [
             {
                 key: "INVITE_MODE",
-                label: "开启私人图书馆模式",
+                label: "སྒེར་སྤྱོད་རྣམ་པའི་ཁ་ཕྱེས།",
                 fields: [
-                    { icon: "lock", key: "INVITE_CODE", label: "访问码" },
-                    { icon: "person", key: "INVITE_MESSAGE", type: 'textarea', label: "提示语" },
+                    { icon: "lock", key: "INVITE_CODE", label: "གསང་གྲངས།" },
+                    { icon: "person", key: "INVITE_MESSAGE", type: 'textarea', label: "དྲན་སྐུལ་གྱི་སྐད་ཆ།" },
                 ],
             },
             ],
         },
         {
             show: false,
-            title: "用户设置",
+            title: "སྤྱོད་མཁན་སྒྲིག་འགོད།",
             fields: [
-                { icon: "", key: "ALLOW_GUEST_READ", label: "允许访客在线阅读（无需注册和登录）", type: 'checkbox' },
-                { icon: "", key: "ALLOW_GUEST_DOWNLOAD", label: "允许任意下载（访客无需注册和登录）", type: 'checkbox' },
-                { icon: "", key: "ALLOW_GUEST_PUSH", label: "允许任意推送Kindle（访客无需注册和登录）", type: 'checkbox' },
+                { icon: "", key: "ALLOW_GUEST_READ", label: "ཐོ་འགོད་མ་བྱེད་པར་ལྟ་ཀློག་གི་ཆོག་མཆན་ཐོབ་པར་བགྱིས།", type: 'checkbox' },
+                { icon: "", key: "ALLOW_GUEST_DOWNLOAD", label: "ཐོ་འགོད་མ་བྱེད་པར་ཕབ་ལེན་གྱི་ཆོག་མཆན་ཐོབ་པར་བགྱིས།", type: 'checkbox' },
+                { icon: "", key: "ALLOW_GUEST_PUSH", label: "ཐོ་འགོད་མ་བྱེད་པར་སྒྲིག་ཆས་མཉམ་མཐུད་ཆོག་མཆན་ཐོབ་པར་བགྱིས།", type: 'checkbox' },
             ],
             groups: [
             {
                 key: "ALLOW_REGISTER",
-                label: "允许访客以邮箱注册账号",
+                label: "ཡིག་ཟམ་ནས་ཐོ་འགོད་བྱེད་རུང་།",
                 fields: [
-                    { icon: "info", key: "SIGNUP_MAIL_TITLE", label: "激活邮件标题" },
-                    { icon: "info", key: "SIGNUP_MAIL_CONTENT", label: "激活邮件正文", type: 'textarea' },
-                    { icon: "info", key: "RESET_MAIL_TITLE", label: "重置密码邮件标题" },
-                    { icon: "info", key: "RESET_MAIL_CONTENT", label: "重置密码邮件正文", type: 'textarea' },
+                    { icon: "info", key: "SIGNUP_MAIL_TITLE", label: "འཕྲིན་ཡིག་གི་ཁ་བྱང་གཏན་ཁེལ།" },
+                    { icon: "info", key: "SIGNUP_MAIL_CONTENT", label: "འཕྲིན་ཡིག་གི་ནང་དོན་བཀོད་སྒྲིག", type: 'textarea' },
+                    { icon: "info", key: "RESET_MAIL_TITLE", label: "གསང་གྲངས་བསྐྱར་སྒྲིག་གི་འཕྲིན་ཡིག་ཁ་བྱང་།" },
+                    { icon: "info", key: "RESET_MAIL_CONTENT", label: "གསང་གྲངས་བསྐྱར་སྒྲིག་གི་འཕྲིན་ཡིག་གཞུང་དངོས།", type: 'textarea' },
                 ],
             },
             ],
@@ -166,86 +168,86 @@ export default {
 
         {
             show: false,
-            title: '社交网络登录',
+            title: 'སྤྱི་ཚོགས་འབྲེལ་ལམ་ནས་ཐོ་འཇུག',
             fields: [ ],
             show_socials: true,
         },
         {
             show: false,
-            title: "邮件服务",
-            subtitle: '邮箱注册、推送Kindle依赖此配置(SMTP服务器地址可带端口，或者不带端口，默认为465号)',
+            title: "ཡིག་ཟམ་ཞབས་ཞུ།",
+            subtitle: 'ཡིག་ཟམ་ཐོ་འགོད་དང་སྒྲིག་ཆས་མཉམ་མཐུད་བཅས་ལ་སྒྲིག་འགོད་འདིར་རེག་ལས་ཡོད།',
             fields: [
-                { icon: "email", key: "smtp_server", label: "SMTP服务器（例如 smtp-mail.outlook.com:587）" },
-                { icon: "person", key: "smtp_username", label: "SMTP用户名（例如 user@gmail.com）" },
-                { icon: "lock", key: "smtp_password", label: "SMTP密码" },
-                { icon: "info", key: "smtp_encryption", label: "SMTP安全性", type: 'select',
-                    items: [{text: "SSL", value: "SSL"}, {text: "TLS(多数邮箱为此选项)", value: "TLS"} ]
+                { icon: "email", key: "smtp_server", label: "ཡིག་ཟམ་ཞབས་ཞུ་སྒྲིག་ཆས་ཀྱི་དྲ་གནས།" },
+                { icon: "person", key: "smtp_username", label: "ཡིག་ཟམ་ཞབས་ཞུ་སྒྲིག་ཆས་ཀྱི་སྤྱོད་མཁན་མིང་།（དཔེར་ན 123456@qq.com）" },
+                { icon: "lock", key: "smtp_password", label: "ཡིག་ཟམ་ཞབས་ཞུ་སྒྲིག་ཆས་ཀྱི་གསང་གྲངས།" },
+                { icon: "info", key: "smtp_encryption", label: "ཡིག་ཟམ་ཞབས་ཞུ་སྒྲིག་ཆས་ཀྱི་བདེ་འཇགས་རང་བཞིན།", type: 'select',
+                    items: [{text: "SSL", value: "SSL"}, {text: "TLSཡིན་རིང་གོ་ཆོད་པའི་གདམ་གསེས།", value: "TLS"} ]
                 },
             ],
             buttons: [
-                { icon: "email", label: "测试邮件", action: "test_email" },
+                { icon: "email", label: "ཚོད་ལྟའི་ཡིག་ཟམ།", action: "test_email" },
             ],
         },
         {
             show: false,
-            title: "书籍标签分类",
-            subtitle: '配置「分类导航」页面里预设的分类。添加书籍时，若书名或者作者名称出现以下分类，则自动添加对应的标签。',
+            title: "དཔེ་དེབ་རིགས་བཀར་རྟགས་བྱང་།",
+            subtitle: 'རྟགས་བྱང་ནས་རིགས་བཀར་བཏང་ཟིན་པའི་དཔེ་་ཆ་དེ་ཉིད་དྲ་ངོས་ནས་རིགས་བཀར་ནང་དོན་ལྟར་དཀར་ཆག་གསར་བ་བཟོས་འགྲོ། རབ་ཡིན་ན་མཛད་པ་པོ་དང་དཔེ་རྒྱུན་ལ་ཡང་རྟགས་བྱང་བཟོ་རོགས།',
             fields: [
-                { icon: "person", key: "BOOK_NAV", type: 'textarea', label: "分类" },
+                { icon: "person", key: "BOOK_NAV", type: 'textarea', label: "རིགས་བཀར་རྣམ་གྲངས།" },
             ],
         },
         {
             show: false,
-            title: '友情链接',
+            title: 'མཛའ་འབྲེལ་དྲ་ཚིགས།',
             fields: [ ],
             show_friends: true,
         },
 
         {
             show: false,
-            title: "互联网书籍信息源",
+            title: "དྲ་སྒང་གི་ཆ་འཕྲིན་ཡོང་ཁུངས།",
             fields: [
-                { icon: "", key: "auto_fill_meta", label: "自动从互联网拉取新书的书籍信息", type: 'checkbox' },
-                { icon: "info", key: "douban_baseurl", label: "豆瓣插件API地址(例如 http://10.0.0.1:8080 )" },
-                { icon: "info", key: "douban_max_count", label: "豆瓣插件API查询结果数量" },
+                { icon: "", key: "auto_fill_meta", label: "རང་འགུལ་སྒོས་དྲ་སྒང་ནས་ཆ་འཕྲིན་ཐོབ་པར་བགྱིས། བོད་ཡིག་ལ་གོ་མི་ཆོད།", type: 'checkbox' },
+                { icon: "info", key: "douban_baseurl", label: "Doubanདྲ་ཚིགས་ཀྱི་ནང་འདྲེན་API" },
+                { icon: "info", key: "douban_max_count", label: "Doubanདྲ་ཚིགསནས་ཐོན་པའི་ཁ་གྲངས།" },
             ],
             tips: [
                 {
-                    text: "若需要启用豆瓣插件，请参阅安装文档的说明。若出现失败，可尝试更换镜像，例如 talebook/douban-api-rs ",
-                    link: "https://github.com/talebook/talebook/blob/master/document/README.zh_CN.md#%E5%A6%82%E6%9E%9C%E9%85%8D%E7%BD%AE%E8%B1%86%E7%93%A3%E6%8F%92%E4%BB%B6",
+                    text: "གལ་ཏེ་མི་ཤེས་ན་འདིའི་སྐོར་བསྐྱུར་ཤོག བོད་ཡིག་དཔེ་དེབ་ལ་མིག་སྔར་ནུས་པ་འདི་བེད་སྤྱོད་གཏོང་ཐབས་མེད།",
+                    link: "https://github.com/khangey",
                 }
             ],
         },
 
         {
             show: false,
-            title: "高级配置项",
+            title: "མཐ་རིམ་སྒྲིག་འགོད།",
             fields: [
-                { icon: "home", key: "static_host", label: "CDN域名" },
-                // 后续可以修改为choice下拉框选项
-                { icon: "info", key: "BOOK_NAMES_FORMAT", label: "目录和文件名模式", type: 'select',
-                    items: [{text: "使用拼音字母目录名 (兼容性高)", value: "en"}, {text: "使用中文目录名 (UTF8编码，更美观)", value: "utf8"} ]
+                { icon: "home", key: "static_host", label: "CDNཁོངས་མིང་།" },
+                // རྗེས་སུ་སྒྲིག་འགོད་འདི་ཉིད་གདམ་གསེས་ཅན་ཏུ་བཟོས་ཆོག
+                { icon: "info", key: "BOOK_NAMES_FORMAT", label: "དཀར་ཆག་དང་དཔེ་དེབ་མིང་གི་རྣམ་པ།", type: 'select',
+                    items: [{text: "དབྱིན་ཡིག་གི་གསལ་བྱེད་བེད་སྤྱོད།", value: "en"}, {text: "བོད་ཡིག་གི་གསལ་བྱེད་བེད་སྤྱོད།", value: "utf8"} ]
                 },
-                { icon: "info", key: "avatar_service", label: "可使用www.gravatar.com或cravatar.cn头像服务" },
-                { icon: "info", key: "MAX_UPLOAD_SIZE", label: "文件上传字节数限制(例如100MB或100KB）" },
-                { icon: "lock", key: "cookie_secret", label: "COOKIE随机密钥" },
-                { icon: "info", key: "scan_upload_path", label: "批量导入扫描目录" },
-                { icon: "info", key: "push_title", label: "邮件推送的标题" },
-                { icon: "info", key: "push_content", label: "邮件推送的内容" },
-                { icon: "info", key: "convert_timeout", label: "书籍转换格式的最大超时时间（秒）" },
-                { icon: "", key: "autoreload", label: "更新配置后自动重启服务器(首次开启需人工重启)", type: 'checkbox' },
+                { icon: "info", key: "avatar_service", label: "www.gravatar.com འམ cravatar.cn ནས་མགོ་པར་ཞབས་ཞུ་སྤྱོད་རུང་།" },
+                { icon: "info", key: "MAX_UPLOAD_SIZE", label: "ཡིག་ཆའི་ཆེ་ཆུང་ཚད་བཀག དཔེར་ན100MBལས་བརྒལ་མི་རུང་བ།" },
+                { icon: "lock", key: "cookie_secret", label: "COOKIEརང་གྲུབ་གསང་གྲངས།" },
+                { icon: "info", key: "scan_upload_path", label: "ཡིག་ཆ་གང་མང་ནང་འདྲེན་བྱེད་ཆོག" },
+                { icon: "info", key: "push_title", label: "ཡིག་ཟམ་སྤྱི་བསྒྲགས་ཀྱི་ཁ་བྱང་།" },
+                { icon: "info", key: "push_content", label: "ཡིག་ཟམ་སྤྱི་བསྒྲགས་ཀྱི་གཞུང་དངོས།" },
+                { icon: "info", key: "convert_timeout", label: "དཔེ་དེབ་རྣམ་གཞག་བརྗེ་བསྒྱུར་གྱི་ཆེས་འགོར་པའི་ཆུ་ཚོད།" },
+                { icon: "", key: "autoreload", label: "སྒྲིག་འགོད་བྱེད་ཐེངས་རེར་རང་འགུལ་ནས་ཞབས་ཞུ་སྒྲིག་ཆས་ནུས་སློང་བྱ་ངེས།", type: 'checkbox' },
             ],
             tips: [
                 {
-                    text: "若需要调整Logo，请参阅安装文档的说明。",
-                    link: "https://github.com/talebook/talebook/blob/master/document/README.zh_CN.md#logo",
+                    text: "དྲ་ཚིགས་ཀྱི་རྟགས་རིས་བརྗེ་དགོས་ན། གཤམ་གྱི་དྲ་ལམ་ཕྱོགས་སྟོན་ནས་བཟོ་བཅོས་བྱོས།",
+                    link: "https://github.com/khangey/Palyonbook/blob/master/document/README.zh_CN.md#logo",
                 }
             ],
         },
 
         {
             show: false,
-            title: "SSL证书管理",
+            title: "SSLདཔང་ཡིག་དོ་དམ།",
             fields: [],
             show_ssl: true,
         },
@@ -262,12 +264,12 @@ export default {
                 if ( rsp.err != 'ok' ) {
                     this.$alert('error', rsp.msg);
                 } else {
-                    this.$alert('success', '保存成功！可能需要5~10秒钟生效！');
+                    this.$alert('success', 'གསོག་འཇོག་བྱས་ཚར། ཏོག་ཙམ་འགོར་རྗེས་ནུས་པ་ཐོན་ངེས།');
                 }
             });
         },
         show_sns_config: function(s) {
-            var msg = `请前往${s.text}的 <a :href="${s.link}" target="_blank">配置页面</a> 获取密钥，并设置回调地址（callback URL）为
+            var msg = `དྲ་ལམ${s.text}ལ་བསྐྱོད་ནས<a :href="${s.link}" target="_blank">དྲ་ངོས་སྒྲིག་འགོད་བྱོས།</a>གསང་གྲངས་ལེན་པ་དང་（callback URL）ལ་བརྗེ་ཞིག
             <code>${this.site_url}/auth/complete/${s.value}.do</code>`;
             this.$alert("success", msg);
         },

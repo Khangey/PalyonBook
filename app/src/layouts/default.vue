@@ -21,9 +21,9 @@
                     <v-card-actions v-if="$store.state.alert.type!=='success' || $store.state.alert.to">
                         <v-spacer></v-spacer>
                         <v-btn v-if='$store.state.alert.to' color="primary"
-                               @click="$router.push($store.state.alert.to);$store.commit('close_alert')">好的
+                               @click="$router.push($store.state.alert.to);$store.commit('close_alert')">ལགས་སོ།།
                         </v-btn>
-                        <v-btn v-else color="primary" @click="$store.commit('close_alert')">关闭</v-btn>
+                        <v-btn v-else color="primary" @click="$store.commit('close_alert')">ཁ་རྒྱག</v-btn>
                         <v-spacer></v-spacer>
                     </v-card-actions>
                 </v-card>

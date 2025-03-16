@@ -3,9 +3,9 @@
         <v-col cols="12">
             <v-dialog v-model="dialog_kindle" persistent width="300">
                 <v-card>
-                    <v-card-title class="">推送到Kindle</v-card-title>
+                    <v-card-title class="">Kindleལ་མཐུད་སྤྱོད།</v-card-title>
                     <v-card-text>
-                        <p>填写Kindle收件人邮箱地址：</p>
+                        <p>ཡིག་ཟམ་ཨང་གྲངས་བསྐོང་།</p>
                         <v-combobox
                             :items="email_items"
                             :rules="[check_email]"
@@ -16,19 +16,19 @@
                             auto-select-first
                             required
                         ></v-combobox>
-                        <small>* 请先将本站邮箱加入到Kindle发件人中:<br/>{{ kindle_sender }}</small>
+                        <small>* སྔོན་ལ་དྲ་གནས་འདི་ཡིག་ཟམ་ཁྲོད་དུ་འཇོག་དགོས།<br/>{{ kindle_sender }}</small>
                     </v-card-text>
                     <v-card-actions>
-                        <v-btn color="" text @click="dialog_kindle = false">取消</v-btn>
+                        <v-btn color="" text @click="dialog_kindle = false">དོར།</v-btn>
                         <v-spacer></v-spacer>
-                        <v-btn color="primary" text @click="sendto_kindle">发送</v-btn>
+                        <v-btn color="primary" text @click="sendto_kindle">བསྐུར།</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
 
             <v-dialog v-model="dialog_download" persistent width="300">
                 <v-card>
-                    <v-card-title color="primary" class="">下载书籍</v-card-title>
+                    <v-card-title color="primary" class="">དཔེ་ཆ་ཕབ་ལེན།</v-card-title>
                     <v-card-text>
                         <v-list v-if="book.files.length > 0">
                             <v-list-item :key="'file-'+file.format" v-for="file in book.files" target="_blank"
@@ -49,11 +49,11 @@
                                 </v-list-item-content>
                             </v-list-item>
                         </v-list>
-                        <p v-else><br/>本书暂无可供下载的文件格式</p>
+                        <p v-else><br/>དཔེ་ཆ་འདི་ལ་ཕབ་ལེན་བྱེད་རུང་བའི་རྣམ་གཞག་མི་འདུག</p>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
-                        <v-btn text @click="dialog_download = false">关闭</v-btn>
+                        <v-btn text @click="dialog_download = false">ཁ་རྒྱག</v-btn>
                         <v-spacer></v-spacer>
                     </v-card-actions>
                 </v-card>
@@ -61,17 +61,17 @@
 
             <v-card v-if="dialog_refer">
                 <v-toolbar flat dense dark color="primary">
-                    从互联网同步书籍信息
+                    དྲ་ལམ་ནས་དཔེ་དེབ་ཀྱི་ཆ་འཕྲིན་ཐོབ་པར་བྱ།
                     <v-spacer></v-spacer>
-                    <v-btn outlined text @click="dialog_refer = false">取消</v-btn>
+                    <v-btn outlined text @click="dialog_refer = false">དོར།</v-btn>
                 </v-toolbar>
                 <v-card-text xclass="pt-3 px-3 px-sm-6">
                     <p class="py-6 text-center" v-if="refer_books_loading">
                         <v-progress-circular indeterminate color="primary"></v-progress-circular>
                     </p>
-                    <p class="py-6 text-center" v-else-if="refer_books.length === 0">无匹配的书籍信息</p>
+                    <p class="py-6 text-center" v-else-if="refer_books.length === 0">དཔེ་དེབ་ཀྱི་ཆ་འཕྲིན་རྙེད་མ་སོང་།</p>
                     <template v-else>
-                        <p>请选择最匹配的记录复制为本书的描述信息</p>
+                        <p>དཔེ་དེབ་འདིར་འཚམ་པའི་ངོ་སྤྲོད་མདོར་བསྡུས་གདམ་གསེས་གནང་རོགས།</p>
                         <book-cards :books="refer_books">
                             <template #actions="{ book }">
                                 <v-card-actions>
@@ -86,7 +86,7 @@
                                         dark
                                         :href="book.website"
                                         target="__blank"
-                                        :color="book.source === '豆瓣' ? 'green' : 'blue'"
+                                        :color="book.source === 'Douban' ? 'green' : 'blue'"
                                     >{{ book.source }}
                                     </v-chip
                                     >
@@ -96,20 +96,20 @@
                                             <v-btn color="primary" small rounded v-on="on"
                                                    :loading="refer_books_setting_btn_loading">
                                                 <v-icon small>done</v-icon>
-                                                设置
+                                                སྒྲིག་འགོད།
                                             </v-btn>
                                         </template>
                                         <v-list dense>
                                             <v-list-item @click="set_refer(book.provider_key, book.provider_value)">
-                                                <v-list-item-title>设置书籍信息及图片</v-list-item-title>
+                                                <v-list-item-title>དཔེ་དེབ་ཆ་འཕྲིན་དང་ཕྱི་ཤོག་སྒྲིག་འགོད།</v-list-item-title>
                                             </v-list-item>
                                             <v-list-item
                                                 @click="set_refer(book.provider_key, book.provider_value, { only_meta: 'yes' })">
-                                                <v-list-item-title>仅设置书籍信息</v-list-item-title>
+                                                <v-list-item-title>དཔེ་དེབ་ཆ་འཕྲིན་གཅིག་པུ་སྒྲིག་འགོད།</v-list-item-title>
                                             </v-list-item>
                                             <v-list-item
                                                 @click="set_refer(book.provider_key, book.provider_value, { only_cover: 'yes' })">
-                                                <v-list-item-title>仅设置书籍图片</v-list-item-title>
+                                                <v-list-item-title>དཔེ་དེབ་ཕྱི་ཤོག་གཅིག་པུ་སྒྲིག་འགོད།</v-list-item-title>
                                             </v-list-item>
                                         </v-list>
                                     </v-menu>
@@ -138,13 +138,13 @@
                            @click="dialog_kindle = !dialog_kindle"
                     >
                         <v-icon left v-if="!tiny">email</v-icon>
-                        推送
+                        དེབ་སྐྱེལ།
                     </v-btn
                     >
                     <v-btn :small="tiny" dark color="primary" class="mx-2 d-flex d-sm-flex" :href="'/read/' + book.id"
                            target="_blank">
                         <v-icon left v-if="!tiny">import_contacts</v-icon>
-                        阅读
+                        ལྟ་ཀློག
                     </v-btn
                     >
 
@@ -152,7 +152,7 @@
                         <v-menu offset-y>
                             <template v-slot:activator="{ on }">
                                 <v-btn v-on="on" dark color="primary" class="ml-2" :small="tiny"
-                                >管理
+                                >དོ་དམ།
                                     <v-icon small>more_vert</v-icon>
                                 </v-btn
                                 >
@@ -160,16 +160,16 @@
                             <v-list>
                                 <v-list-item :to="'/book/' + book.id + '/edit'">
                                     <v-icon>settings_applications</v-icon>
-                                    编辑书籍信息
+                                    དཔེ་ཆའི་ཆ་འཕྲིན་བཅོས་སྒྲིག
                                 </v-list-item>
                                 <v-list-item @click="get_refer">
                                     <v-icon>apps</v-icon>
-                                    从互联网更新信息
+                                    དྲ་ལམ་ནས་ཆ་འཕྲིན་གསར་འདྲེན།
                                 </v-list-item>
                                 <v-divider></v-divider>
                                 <v-list-item @click="delete_book">
                                     <v-icon>delete_forever</v-icon>
-                                    删除此书
+                                    དཔེ་ཆ་འདི་གསུབ།
                                 </v-list-item>
                             </v-list>
                         </v-menu>
@@ -184,16 +184,16 @@
                         <v-card-text>
                             <div>
                                 <p class='title mb-0'>{{ book.title }}</p>
-                                <span color="grey--text">{{ book.author }}著，{{ pub_year }}年版</span>
+                                <span color="grey--text">{{ book.author }}ནས་བརྩམས།，{{ pub_year }}ལོར་པར་དུ་སྐྲུན།</span>
                                 <span
                                     v-if='book.files.length>0 && book.files[0].format==="PDF" && book.files[0].size >= 1048576'
-                                    color="grey--text" style="font-weight: bold">&nbsp;&nbsp;&nbsp;[文件格式: PDF - {{
+                                    color="grey--text" style="font-weight: bold">&nbsp;&nbsp;&nbsp;[ཡིག་ཆའི་རྣམ་གཞག་ནི PDF - {{
                                         parseInt(book.files[0].size / 1048576)
                                     }}MB]
                                 </span>
                                 <span
                                     v-else-if='book.files.length>0 && book.files[0].format==="PDF" && book.files[0].size < 1048576'
-                                    color="grey--text" style="font-weight: bold">&nbsp;&nbsp;&nbsp;[文件格式: PDF - {{
+                                    color="grey--text" style="font-weight: bold">&nbsp;&nbsp;&nbsp;[ཡིག་ཆའི་རྣམ་གཞག་ནི PDF - {{
                                         parseInt(book.files[0].size / 1024)
                                     }}KB]
                                 </span>
@@ -218,7 +218,7 @@
                                 <v-chip rounded small dark color="indigo"
                                         :to="'/publisher/' + encodeURIComponent(book.publisher)">
                                     <v-icon>group</v-icon>
-                                    出版：{{ book.publisher }}
+                                    པར་ཁང་ནི་ {{ book.publisher }}
                                 </v-chip>
                                 <v-chip
                                     rounded
@@ -229,11 +229,11 @@
                                     :to="'/series/' + encodeURIComponent(book.series)"
                                 >
                                     <v-icon>explore</v-icon>
-                                    丛书: {{ book.series }}
+                                    དཔེ་རྒྱུན་ནི་ {{ book.series }}
                                 </v-chip>
                                 <v-chip rounded small dark color="grey" v-if="book.isbn">
                                     <v-icon>explore</v-icon>
-                                    ISBN：{{ book.isbn }}
+                                    ISBN ནི {{ book.isbn }}
                                 </v-chip>
                                 <template v-for="tag in book.tags">
                                     <v-chip
@@ -253,7 +253,7 @@
                         </v-card-text>
                         <v-card-text>
                             <p v-if="book.comments" v-html="book.comments"></p>
-                            <p v-else>点击浏览详情</p>
+                            <p v-else>ཞིབ་ཆའི་ནང་དོན་ནི།</p>
                         </v-card-text>
                     </v-col>
                 </v-row>
@@ -270,7 +270,7 @@
                             <v-icon dark>import_contacts</v-icon>
                         </v-list-item-avatar>
                         <v-list-item-content>
-                            <v-list-item-title>在线阅读</v-list-item-title>
+                            <v-list-item-title>དྲ་ལམ་ལྟ་ཀློག</v-list-item-title>
                         </v-list-item-content>
                         <v-list-item-action>
                             <v-icon>mdi-arrow-right</v-icon>
@@ -287,7 +287,7 @@
                   <v-icon dark>import_contacts</v-icon>
                 </v-list-item-avatar>
                 <v-list-item-content>
-                  <v-list-item-title>Txt在线阅读({{ txt_parse_inited ? '已解析' : '未解析' }})</v-list-item-title>
+                  <v-list-item-title>TXTདྲལམ་ལྟ་ཀློག({{ txt_parse_inited ? 'ཁ་ཕྱེས་ཟིན།' : 'ཁ་ཕྱེས་མ་ཐུབ།' }})</v-list-item-title>
                 </v-list-item-content>
                 <v-list-item-action>
                   <v-icon>mdi-arrow-right</v-icon>
@@ -304,7 +304,7 @@
                             <v-icon dark>get_app</v-icon>
                         </v-list-item-avatar>
                         <v-list-item-content>
-                            <v-list-item-title>下载</v-list-item-title>
+                            <v-list-item-title>ཕབ་ལེན།</v-list-item-title>
                         </v-list-item-content>
                         <v-list-item-action>
                             <v-icon>mdi-arrow-right</v-icon>
@@ -321,7 +321,7 @@
                             <v-icon dark>email</v-icon>
                         </v-list-item-avatar>
                         <v-list-item-content>
-                            <v-list-item-title>推送至Kindle</v-list-item-title>
+                            <v-list-item-title>Kindleལ་མཐུད་སྤྱོད།</v-list-item-title>
                         </v-list-item-content>
                         <v-list-item-action>
                             <v-icon>mdi-arrow-right</v-icon>
@@ -438,7 +438,7 @@ export default {
         get_txt_parse_status(){
           this.$backend(`/book/txt/init?id=${this.book.id}&test=1`,)
             .then(res => {
-              if (res.err === "ok" && res.msg === "已解析") {
+              if (res.err === "ok" && res.msg === "ཁ་ཕྱེས་ཟིན།") {
                 this.txt_parse_inited = true;
               }
             })
@@ -474,7 +474,7 @@ export default {
                 if (rsp.err === "ok") {
                     this.$router.push("/book/" + this.book.id);
                     location.reload();
-                    this.$alert("success", "设置成功！");
+                    this.$alert("success", "སྒྲིག་འགོད་ལེགས་འགྲུབ།");
                 } else {
                     this.$alert("error", rsp.msg);
                 }
@@ -489,7 +489,7 @@ export default {
                 method: "POST",
             }).then((rsp) => {
                 if (rsp.err === "ok") {
-                    this.$alert("success", "删除成功");
+                    this.$alert("success", "དོར་གསུབ་བཏང་ཟིན།");
                     this.$router.push("/");
                 } else {
                     this.$alert("error", rsp.msg);
@@ -498,10 +498,10 @@ export default {
         },
         check_email(email) {
             if (email === this.kindle_sender) {
-                return "发件邮件不可作为收件人";
+                return "ཡིག་ཟམ་སྐུར་གནས་ནོར་འདུག གཞན་པར་བརྗེ་རོགས།";
             }
             var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return re.test(email) || "Email格式错误";
+            return re.test(email) || "ཡིག་ཟམ་གྱི་རྣམ་གཞག་ནོར་འདུག";
         },
     },
 };

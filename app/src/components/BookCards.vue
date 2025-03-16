@@ -12,7 +12,7 @@
                         <slot name="introduce" :book="book"></slot>
                         <div class="book-comments">
                             <p v-if="book.comments" v-html="book.comments"></p>
-                            <p  v-else>点击浏览详情</p>
+                            <p  v-else>ཞིབ་ཕྲའི་ནང་དོན་ལ་ལྟ།</p>
                         </div>
                     </v-card-text>
                 </v-col>

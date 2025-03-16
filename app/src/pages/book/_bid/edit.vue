@@ -3,17 +3,17 @@
         <v-col cols=12>
             <v-card>
                 <v-toolbar dark color="primary">
-                    <v-toolbar-title align-center>编辑书籍信息</v-toolbar-title>
+                    <v-toolbar-title align-center>དཔེ་ཆའི་ཆ་འཕྲིན་ཁ་སྣོན།</v-toolbar-title>
                     <v-spacer></v-spacer>
-                    <v-btn class='mr-2' color='red' :to="'/book/'+book.id">取消</v-btn>
-                    <v-btn color='green' @click="save_book">保存</v-btn>
+                    <v-btn class='mr-2' color='red' :to="'/book/'+book.id">དོར།</v-btn>
+                    <v-btn color='green' @click="save_book">གསོག་འཇོག</v-btn>
                 </v-toolbar>
                 <v-card-text class="pa-0 pa-md-2">
                     <v-form>
                         <v-container>
                             <v-row>
                                 <v-col class='py-0' cols=12 sm=6>
-                                    <v-text-field label="书名" v-model="book.title">{{ book.title }}</v-text-field>
+                                    <v-text-field label="དཔེ་ཆའི་མིང་།" v-model="book.title">{{ book.title }}</v-text-field>
                                 </v-col>
                                 <v-col class='py-4' cols=12 sm=6>
                                     <v-rating label="Rating" v-model="book.rating" color="yellow accent-4" length="10"
@@ -21,13 +21,13 @@
                                 </v-col>
                                 <v-col class='py-0' cols=12 sm=6>
                                     <!-- AUTHORS -->
-                                    <v-combobox v-model="book.authors" :items="book.authors" label="作者"
+                                    <v-combobox v-model="book.authors" :items="book.authors" label="མཛད་པ་པོ།"
                                                 :search-input.sync="author_input" hide-selected multiple small-chips>
                                         <template v-slot:no-data>
                                             <v-list-item>
-                                                <span v-if="! author_input">请输入新的名称</span>
+                                                <span v-if="! author_input">མིང་གསར་བ་བསྐོང་རོགས།</span>
                                                 <div v-else>
-                                                    <span class="subheading">添加</span>
+                                                    <span class="subheading">ཁ་སྣོན།</span>
                                                     <v-chip color="green lighten-3" label small rounded> {{
                                                             author_input
                                                         }}
@@ -46,32 +46,32 @@
                                     </v-combobox>
                                 </v-col>
                                 <v-col class='py-0' cols=12 sm=6>
-                                    <v-text-field label="丛书名称" v-model="book.series">{{ book.series }}</v-text-field>
+                                    <v-text-field label="དཔེ་རྒྱུན་གྱི་མིང་།" v-model="book.series">{{ book.series }}</v-text-field>
                                 </v-col>
                                 <v-col class='py-0' cols=12 sm=6>
-                                    <v-text-field label="出版社" v-model="book.publisher">{{ book.publisher }}
+                                    <v-text-field label="པར་ཁང་།" v-model="book.publisher">{{ book.publisher }}
                                     </v-text-field>
                                 </v-col>
                                 <v-col class='py-0' cols=12 sm=6>
-                                    <v-text-field label="出版日期" v-model="book.pubdate">{{ book.pubdate }}</v-text-field>
+                                    <v-text-field label="པར་སྐྲུན་དུས་ཚོད།" v-model="book.pubdate">{{ book.pubdate }}</v-text-field>
                                 </v-col>
                                 <v-col class='py-0' cols=12 sm=6>
-                                    <v-text-field label="ISBN编号" v-model="book.isbn">{{ book.isbn }}</v-text-field>
+                                    <v-text-field label="ISBNཨང་གྲངས།" v-model="book.isbn">{{ book.isbn }}</v-text-field>
                                 </v-col>
                                 <v-col class='py-0' cols=12 sm=6>
-                                    <v-text-field label="语言" v-model="book.language">{{ book.language }}</v-text-field>
+                                    <v-text-field label="སྐད་རིགས།(བོད་སྐད་གདམ་ན་འགྲིག)" v-model="book.language">{{ book.language }}</v-text-field>
                                 </v-col>
 
 
                                 <v-col class='py-0' cols=12>
                                     <!-- TAGS -->
-                                    <v-combobox v-model="book.tags" :items="book.tags" label="标签列表"
+                                    <v-combobox v-model="book.tags" :items="book.tags" label="རྟགས་བྱང་ཀུན་འདུས།"
                                                 :search-input.sync="tag_input" hide-selected multiple small-chips>
                                         <template v-slot:no-data>
                                             <v-list-item>
-                                                <span v-if="! tag_input">请输入新的标签名称</span>
+                                                <span v-if="! tag_input">རྟགས་བྱང་གི་མིང་གསར་བ་བསྐོང་རོགས།</span>
                                                 <div v-else>
-                                                    <span class="subheading">添加标签</span>
+                                                    <span class="subheading">རྟགས་བྱང་ཁ་སྣོན།</span>
                                                     <v-chip color="green lighten-3" label small rounded> {{
                                                             tag_input
                                                         }}
@@ -90,12 +90,12 @@
                                     </v-combobox>
                                 </v-col>
                                 <v-col class='py-0' cols="12">
-                                    <v-textarea small outlined rows="15" label="内容简介" v-model="book.comments"
+                                    <v-textarea small outlined rows="15" label="ནང་དོན་མདོར་བསྡུས།" v-model="book.comments"
                                                 :value="book.comments"></v-textarea>
                                 </v-col>
                                 <v-divider></v-divider>
                                 <v-col align=center cols="12">
-                                    <v-btn dark color='green' @click='save_book'>保存</v-btn>
+                                    <v-btn dark color='green' @click='save_book'>གསོག་འཇོག</v-btn>
                                 </v-col>
                             </v-row>
                         </v-container>
@@ -138,7 +138,7 @@ export default {
     },
     head() {
         return {
-            title: "编辑 " + this.book.title,
+            title: "བཅོས་སྒྲིག" + this.book.title,
         }
     },
     created() {
@@ -166,7 +166,7 @@ export default {
             })
                 .then(rsp => {
                     if (rsp.err === 'ok') {
-                        this.$alert("success", "保存成功！");
+                        this.$alert("success", "གསོག་འཇོག་བྱས་ཚར།");
                         this.$router.push("/book/" + this.book.id);
                     } else {
                         this.$alert("error", rsp.msg);

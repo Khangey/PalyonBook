@@ -1,29 +1,29 @@
 <template>
     <v-card>
-        <v-card-title> 导入图书 <v-chip small class="primary">Beta</v-chip> </v-card-title>
+        <v-card-title> དཔེ་དེབ་ནང་འདྲེན།<v-chip small class="primary">Beta</v-chip> </v-card-title>
         <v-card-text>
-        请将需要导入的书籍放入{{ scan_dir }}目录中。 支持的格式为 azw/azw3/epub/mobi/pdf/txt 。<br/>
-        请注意：此功能为后台异步执行，不必重复点击，启动后可关闭浏览器，或刷新关注表格状态进展。已导入成功的记录请不要删除，以免书籍被再次导入。<br/>
-        另外，还可以使用<a target="_blank" href="https://calibre-ebook.com/">PC版Calibre软件</a>管理书籍，但是请注意：使用完PC版后，需重启Web版方可生效。
+        ཡིག་ཆའི་དཀར་ཆག {{ scan_dir }}ཁྲོད་དུ་ནང་འདྲེན་བྱ་རྒྱུའི་དཔེ་དེབ་འཇོག་རོགས། ད་ལན་གོ་ཆོད་པའི་དཔེ་དེབ་ཡིག་ཆའི་རྣམ་གཞག་ནི་azw/azw3/epub/mobi/pdf/txtསོགས་ཡིན།<br/>
+        ལས་རིམ་འདི་ལ་ཆུ་ཚོད་ཅུང་ཟད་འགོར་སྲིད་པས་ཏོག་ཙམ་སྒུག་དགོས། དེ་བས་དཔེ་དེབ་ནང་འདྲེན་གྱི་རིམ་པ་འདི་ཡང་དང་བསྐྱར་དུ་བསྣན་མི་དགོས།<br/>
+       མ་ཟད་ད་དུང་<a target="_blank" href="https://calibre-ebook.com/">Calibreདཔེ་དེབ་མཉེན་ཆས་</a>སྤྱད་ནས་ཡིག་ཆ་དོ་དམ་བྱ་ཆོག
         </v-card-text>
         <v-card-actions>
-            <v-btn :disabled="loading" outlined color="primary" @click="getDataFromApi"><v-icon>mdi-reload</v-icon>刷新</v-btn>
-            <v-btn :disabled="loading" color="primary" @click="scan_books"><v-icon>mdi-file-find</v-icon>扫描书籍</v-btn>
+            <v-btn :disabled="loading" outlined color="primary" @click="getDataFromApi"><v-icon>mdi-reload</v-icon>གསར་འདྲེན།</v-btn>
+            <v-btn :disabled="loading" color="primary" @click="scan_books"><v-icon>mdi-file-find</v-icon>དཔེ་དེབ་ནང་འདྲེན།</v-btn>
             <template v-if="selected.length > 0">
-                <v-btn :disabled="loading" color="secondary" @click="import_books"><v-icon>mdi-import</v-icon>导入选中书籍 </v-btn>
-                <v-btn :disabled="loading" outlined color="primary" @click="delete_record"><v-icon>mdi-delete</v-icon>删除 </v-btn>
+                <v-btn :disabled="loading" color="secondary" @click="import_books"><v-icon>mdi-import</v-icon>གདམ་ཟིན་པའི་དཔེ་དེབ་ནང་འདྲེན།</v-btn>
+                <v-btn :disabled="loading" outlined color="primary" @click="delete_record"><v-icon>mdi-delete</v-icon>དོར་གསུབ།</v-btn>
             </template>
             <template v-else>
-                <v-btn :disabled="loading" color="warning" @click="import_books"><v-icon>mdi-import</v-icon>导入全部书籍 </v-btn>
+                <v-btn :disabled="loading" color="warning" @click="import_books"><v-icon>mdi-import</v-icon>དཔེ་དེབ་ཆ་ཚང་ནང་འདྲེན།</v-btn>
             </template>
         </v-card-actions>
         <v-card-text>
-            <div v-if="selected.length == 0">请勾选需要处理的文件（默认情况下导入全部书籍即可。已存在的书籍，即使勾选了也不会重复导入）</div>
-            <div v-else>共选择了{{ selected.length }}个</div>
+            <div v-if="selected.length == 0">ཐག་གཅོད་བྱ་དགོས་པའི་དཔེ་དེབ་གདམ་གསེས་གཏོང་རོགས།</div>
+            <div v-else>ཁྱོན་སྡོམ་དཔེ་ཆ{{ selected.length }}གདམ་གསེས་བཏང་།</div>
         </v-card-text>
         <v-tabs v-model="filter_type" @change="getDataFromApi">
-            <v-tab href="#todo">待处理 ({{ count_todo }})</v-tab>
-            <v-tab href="#done">已导入 ({{ count_done  }})</v-tab>
+            <v-tab href="#todo">ཐག་གཅོད་བྱ་རྒྱུའི་དཔེ་ཆ། ({{ count_todo }})</v-tab>
+            <v-tab href="#done">དྲངས་ཟིན་པའི་དཔེ་ཆ། ({{ count_done  }})</v-tab>
         </v-tabs>
         <v-data-table
             dense
@@ -44,16 +44,16 @@
             :footer-props="{ 'items-per-page-options': [10, 50, 100, 1000, 5000, 10000] }"
         >
             <template v-slot:item.status="{ item }">
-                <v-chip small v-if="item.status == 'ready'" class="success">可导入</v-chip>
-                <v-chip small v-else-if="item.status == 'exist'" class="lighten-4">已存在</v-chip>
-                <v-chip small v-else-if="item.status == 'imported'" class="primary">导入成功</v-chip>
-                <v-chip small v-else-if="item.status == 'new'" class="grey">待扫描</v-chip>
+                <v-chip small v-if="item.status == 'ready'" class="success">འདྲེན་རུང་བ།</v-chip>
+                <v-chip small v-else-if="item.status == 'exist'" class="lighten-4">ད་ཡོད།</v-chip>
+                <v-chip small v-else-if="item.status == 'imported'" class="primary">འདྲེན་འཇུག་ལེགས་འགྲུབ།</v-chip>
+                <v-chip small v-else-if="item.status == 'new'" class="grey">ནང་འདྲེན་བྱ་རྒྱུའི་དཔེ་དེབ།</v-chip>
                 <v-chip small v-else class="info">{{ item.status }}</v-chip>
             </template>
             <template v-slot:item.title="{ item }">
-                书名：<span v-if="item.book_id == 0"> {{ item.title }} </span>
+                དཔེ་ཆའི་མིང་།书名：<span v-if="item.book_id == 0"> {{ item.title }} </span>
                 <a v-else target="_blank" :href="`/book/${item.book_id}`">{{ item.title }}</a> <br />
-                作者：{{ item.author }}
+                མཛད་པ་པོ།{{ item.author }}
             </template>
         </v-data-table>
     </v-card>
@@ -75,10 +75,10 @@ export default {
         count_done: 0,
         headers: [
             { text: "ID", sortable: true, value: "id" },
-            { text: "状态", sortable: true, value: "status" },
-            { text: "路径", sortable: true, value: "path" },
-            { text: "扫描信息", sortable: false, value: "title" },
-            { text: "时间", sortable: true, value: "create_time", width: "200px" },
+            { text: "རྣམ་པ།", sortable: true, value: "status" },
+            { text: "ཡིག་ཆའི་དཀར་ཆག", sortable: true, value: "path" },
+            { text: "ནང་འདྲེན་དོན་ཚན།", sortable: false, value: "title" },
+            { text: "ཆུ་ཚོད།", sortable: true, value: "create_time", width: "200px" },
         ],
         progress: {
             done: 0,
@@ -153,7 +153,7 @@ export default {
                             }, 1000);
                         } else {
                             this.getDataFromApi();
-                            this.$alert("info", "处理完毕！");
+                            this.$alert("info", "ཐག་གཅོད་བྱས་ཚར།");
                         }
                     })
             }, 2000);

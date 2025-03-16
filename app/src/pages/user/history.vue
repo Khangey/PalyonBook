@@ -2,7 +2,7 @@
     <div>
         <v-row align=start v-if="history.length == 0">
             <v-col cols=12>
-                <p class="title"> 暂无阅读历史。请尽情<a to="/">畅游书籍的海洋</a>吧~ </p>
+                <p class="title"> མིག་སྔར་ཟིན་ཐོ་མེད་གི <a to="/"></a>ནས་དཔེ་ཀློག་ལ་འཇུག་རོགས། </p>
             </v-col>
         </v-row>
         <v-row v-else v-for="item in history" :key="item.name">
@@ -11,7 +11,7 @@
                 <v-divider></v-divider>
             </v-col>
             <v-col cols=12 v-if="item.books.length==0" >
-                <p class="pb-6">无记录</p>
+                <p class="pb-6">ཟིན་ཐོ་མེད།</p>
             </v-col>
             <v-col cols=4 sm=2 v-else v-for="book in item.books" :key="item.name + book.id">
                 <v-card :to="book.href" class="ma-1">
@@ -30,9 +30,9 @@ export default {
         history: function() {
             if ( this.user.extra === undefined ) { return [] }
             return [
-                { name: '在线阅读', books: this.get_history(this.user.extra.read_history) },
-                { name: '推送过的书', books: this.get_history(this.user.extra.push_history) },
-                { name: '浏览记录', books: this.get_history(this.user.extra.visit_history) },
+                { name: 'དྲ་ལམ་ལྟ་ཀློག', books: this.get_history(this.user.extra.read_history) },
+                { name: 'མཐུད་སྦྲེལ་དཔེ་ཆ།', books: this.get_history(this.user.extra.push_history) },
+                { name: 'ལྟ་ཀློག་ཟིན་ཐོ།', books: this.get_history(this.user.extra.visit_history) },
             ]
         },
     },
@@ -46,7 +46,7 @@ export default {
         return app.$backend("/user/info?detail=1");
     },
     head: () => ({
-        title: "阅读记录",
+        title: "ལྟ་ཀློག་ཟིན་ཐོ།",
     }),
     created() {
         this.init(this.$route);

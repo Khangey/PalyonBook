@@ -4,9 +4,9 @@
             <v-divider class='mt-10 mb-3' ></v-divider>
             <p class='mb-0 text-center footer-text' v-html="footer_text"></p>
             <p>
-            <v-btn small text target="_blank" href="https://github.com/talebook/talebook">Github</v-btn>
-            | <v-btn small text target="_blank" href="https://hub.docker.com/r/talebook/talebook">Docker</v-btn>
-            | <v-btn small text target="_blank" href="http://talebook.org">Project</v-btn>
+            <v-btn small text target="_blank" href="https://palyon.net">དཔལ་ཡོན་དྲ་མང་།</v-btn>
+            | <v-btn small text target="_blank" href="https://mt.tibetbaiyun.com">དཔལ་ཡོན་རིག་ནུས་ཡིག་སྒྱུར།</v-btn>
+            | <v-btn small text target="_blank" href="http://www.tibetanfont.com">བོག་ཡིག་གློག་རྡུལ་ཡིག་གཟུགས།</v-btn>
             </p>
         </v-col>
     </v-row>
@@ -24,7 +24,7 @@ export default {
         },
     },
     data: () => ({
-        footer: "本站基于Calibre构建，感谢开源界的力量。所有资源搜集于互联网，如有侵权请邮件联系。",
+        footer: "དྲ་ཚིགས་དང་དཔེ་ཆའི་མཛོད་འདི་ནི་བོད་ལྗོངས་དཔལ་ཡོན་ཆ་འཕྲིན་ཚན་ཡོད་ཀུང་སིས་བཟོས། ｜ 藏ICP备2023000237号-10",
     })
 }
 </script>
